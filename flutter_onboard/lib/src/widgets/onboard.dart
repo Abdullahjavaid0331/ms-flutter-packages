@@ -173,14 +173,14 @@ class _OnBoard extends HookConsumerWidget {
       child: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/test.jpeg"),
+            image: AssetImage("assets/images/background.png"),
             fit: BoxFit.cover,
           ),
         ),
         child: Column(
           children: <Widget>[
             const SizedBox(
-              height: 20,
+              height: 40,
             ),
             Expanded(
               child: SizedBox(

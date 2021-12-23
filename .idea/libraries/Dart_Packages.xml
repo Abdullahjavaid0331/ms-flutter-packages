@@ -299,8 +299,8 @@
         <entry key="lint">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../../../../flutter/.pub-cache/hosted/pub.dartlang.org/lint-1.5.3/lib" />
               <option value="$PROJECT_DIR$/../../../../flutter/.pub-cache/hosted/pub.dartlang.org/lint-1.8.1/lib" />
+              <option value="$PROJECT_DIR$/../../../../flutter/.pub-cache/hosted/pub.dartlang.org/lint-1.5.3/lib" />
             </list>
           </value>
         </entry>

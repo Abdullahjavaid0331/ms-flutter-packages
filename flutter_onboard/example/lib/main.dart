@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
       title: "RECIPES",
       description:
           "All food recipes are described in two sections: Ingredients and Directions; Easy as that! Cooking doesn’t have to be complicated and our food recipes app can help you to prepare some awesome meals.",
-      imgUrl: "assets/images/graph.png",
+      imgUrl: "assets/images/image.png",
     ),
     const OnBoardModel(
       title: "Track your progress with statistics",
