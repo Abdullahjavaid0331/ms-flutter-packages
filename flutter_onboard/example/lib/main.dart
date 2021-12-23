@@ -15,20 +15,13 @@ class App extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
-  final PageController _pageController = PageController();
+  final PageController pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: OnBoard(
-        pageController: _pageController,
-        // Either Provide onSkip Callback or skipButton Widget to handle skip state
-        onSkip: () {
-          // print('skipped');
-        },
-        // Either Provide onDone Callback or nextButton Widget to handle done state
-        onDone: () {
-          // print('done tapped');
-        },
+        pageController: pageController,
         onBoardData: onBoardData,
         titleStyles: const TextStyle(
           color: Colors.deepOrange,
@@ -47,17 +40,6 @@ class HomeScreen extends StatelessWidget {
           inactiveSize: Size(8, 8),
           activeSize: Size(12, 12),
         ),
-        // Either Provide onSkip Callback or skipButton Widget to handle skip state
-        skipButton: TextButton(
-          onPressed: () {
-            // print('skipButton pressed');
-          },
-          child: const Text(
-            "Skip",
-            style: TextStyle(color: Colors.deepOrangeAccent),
-          ),
-        ),
-        // Either Provide onDone Callback or nextButton Widget to handle done state
         nextButton: OnBoardConsumer(
           builder: (context, ref, child) {
             final state = ref.watch(onBoardStateProvider);
@@ -90,33 +72,32 @@ class HomeScreen extends StatelessWidget {
 
   void _onNextTap(OnBoardState onBoardState) {
     if (!onBoardState.isLastPage) {
-      _pageController.animateToPage(
+      pageController.animateToPage(
         onBoardState.page + 1,
         duration: const Duration(milliseconds: 250),
         curve: Curves.easeInOutSine,
       );
-    } else {
-      //print("nextButton pressed");
-    }
+    } else {}
   }
-}
 
-final List<OnBoardModel> onBoardData = [
-  const OnBoardModel(
-    title: "Set your own goals and get better",
-    description: "Goal support your motivation and inspire you to work harder",
-    imgUrl: "assets/images/weight.png",
-  ),
-  const OnBoardModel(
-    title: "Track your progress with statistics",
-    description:
-        "Analyse personal result with detailed chart and numerical values",
-    imgUrl: 'assets/images/graph.png',
-  ),
-  const OnBoardModel(
-    title: "Create photo comparision and share your results",
-    description:
-        "Take before and after photos to visualize progress and get the shape that you dream about",
-    imgUrl: 'assets/images/phone.png',
-  ),
-];
+  final List<OnBoardModel> onBoardData = [
+    const OnBoardModel(
+      title: "RECIPES",
+      description:
+          "All food recipes are described in two sections: Ingredients and Directions; Easy as that! Cooking doesn’t have to be complicated and our food recipes app can help you to prepare some awesome meals.",
+      imgUrl: "assets/images/graph.png",
+    ),
+    const OnBoardModel(
+      title: "Track your progress with statistics",
+      description:
+          "Analyse personal result with detailed chart and numerical values",
+      imgUrl: 'assets/images/phone.png',
+    ),
+    const OnBoardModel(
+      title: "Create photo comparision and share your results",
+      description:
+          "Take before and after photos to visualize progress and get the shape that you dream about",
+      imgUrl: 'assets/images/test.jpeg',
+    ),
+  ];
+}

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_onboard/flutter_onboard.dart';
 import 'package:flutter_onboard/src/contants/constants.dart';
-import 'package:flutter_onboard/src/models/onboard_state_model.dart';
-import 'package:flutter_onboard/src/models/page_indicator_style_model.dart';
-import 'package:flutter_onboard/src/providers/providers.dart';
 import 'package:flutter_onboard/src/widgets/page_indicator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -173,102 +170,103 @@ class _OnBoard extends HookConsumerWidget {
         pageIndicatorHeight;
 
     return SafeArea(
-      child: Column(
-        children: <Widget>[
-          Container(
-            height: skipContainerHeight,
-            alignment: Alignment.centerRight,
-            child: skipButton ??
-                TextButton(
-                  onPressed: () => _onSkipPressed(onSkip),
-                  child: const Text(
-                    "Skip",
-                    style: TextStyle(color: Colors.blueAccent),
-                  ),
-                ),
+      child: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/test.jpeg"),
+            fit: BoxFit.cover,
           ),
-          Expanded(
-            child: SizedBox(
-                height: pageViewHeight,
-                child: PageView.builder(
-                  controller: pageController,
-                  onPageChanged: (page) => onBoardStateNotifier.onPageChanged(
-                      page, onBoardData.length),
-                  itemCount: onBoardData.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return SizedBox(
-                      child: Column(
-                        children: <Widget>[
-                          Expanded(
-                            child: Image.asset(
-                              onBoardData[index].imgUrl,
-                              width: imageWidth,
-                              height: imageHeight,
-                              fit: BoxFit.contain,
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(
-                              onBoardData[index].title,
-                              textAlign: TextAlign.center,
-                              style: titleStyles ??
-                                  const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            margin: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(
-                              onBoardData[index].description,
-                              textAlign: TextAlign.center,
-                              style: descriptionStyles ??
-                                  const TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black54,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                )),
-          ),
-          SizedBox(
-            height: pageIndicatorHeight,
-            child: PageIndicator(
-              count: onBoardData.length,
-              activePage: onBoardState.page,
-              pageIndicatorStyle: pageIndicatorStyle,
+        ),
+        child: Column(
+          children: <Widget>[
+            const SizedBox(
+              height: 20,
             ),
-          ),
-          Container(
-            height: footerContentHeight,
-            width: screenSize.width,
-            alignment: Alignment.center,
-            child: ButtonTheme(
-              minWidth: 230,
-              height: 50,
-              child: nextButton != null
-                  ? nextButton!
-                  : ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: const StadiumBorder(),
-                        elevation: 0,
-                      ),
-                      onPressed: () => _onNextTap(onBoardState),
-                      child: Text(
-                        onBoardState.isLastPage ? "Done" : "Next",
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                    ),
+            Expanded(
+              child: SizedBox(
+                  height: pageViewHeight,
+                  child: PageView.builder(
+                    controller: pageController,
+                    onPageChanged: (page) => onBoardStateNotifier.onPageChanged(
+                        page, onBoardData.length),
+                    itemCount: onBoardData.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        child: Column(
+                          children: <Widget>[
+                            Expanded(
+                              child: Image.asset(
+                                onBoardData[index].imgUrl,
+                                width: imageWidth,
+                                height: imageHeight,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                            Container(
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                              child: Text(
+                                onBoardData[index].title,
+                                textAlign: TextAlign.center,
+                                style: titleStyles ??
+                                    const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 12),
+                              child: Text(
+                                onBoardData[index].description,
+                                textAlign: TextAlign.center,
+                                style: descriptionStyles ??
+                                    const TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.black54,
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  )),
             ),
-          ),
-        ],
+            SizedBox(
+              height: pageIndicatorHeight,
+              child: PageIndicator(
+                count: onBoardData.length,
+                activePage: onBoardState.page,
+                pageIndicatorStyle: pageIndicatorStyle,
+              ),
+            ),
+            Container(
+              height: footerContentHeight,
+              width: screenSize.width,
+              alignment: Alignment.center,
+              child: ButtonTheme(
+                minWidth: 230,
+                height: 50,
+                child: nextButton != null
+                    ? nextButton!
+                    : ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: const StadiumBorder(),
+                          elevation: 0,
+                        ),
+                        onPressed: () => _onNextTap(onBoardState),
+                        child: Text(
+                          onBoardState.isLastPage ? "Done" : "Next",
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
